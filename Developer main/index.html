@@ -4,222 +4,478 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Git & GitHub Tutorial</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #161b22, #1f2937);
+      border-bottom: 1px solid #30363d;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #f0f6fc;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      color: #8b949e;
+      font-size: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #238636;
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    nav {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 0.8rem 2rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #58a6ff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #79c0ff; }
+
+    main {
+      max-width: 860px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #f0f6fc;
+      border-left: 4px solid #238636;
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: #79c0ff;
+      margin: 1.2rem 0 0.4rem;
+    }
+
+    p { margin-bottom: 0.8rem; color: #c9d1d9; }
+
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    code {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: #e6edf3;
+    }
+
+    pre {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 0.6rem 0 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #e6edf3;
+    }
+
+    pre .comment { color: #8b949e; }
+    pre .cmd     { color: #79c0ff; }
+    pre .flag    { color: #d2a8ff; }
+    pre .str     { color: #a5d6ff; }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .step-num {
+      position: absolute;
+      top: -12px;
+      left: 16px;
+      background: #238636;
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .step h4 { color: #f0f6fc; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .step p  { font-size: 0.85rem; color: #8b949e; margin: 0; }
+
+    .tip {
+      background: #0c2d6b22;
+      border: 1px solid #1f6feb;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #a5d6ff;
+    }
+
+    .tip::before { content: "💡  "; }
+
+    .warn {
+      background: #3d1f0022;
+      border: 1px solid #d29922;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #e3b341;
+    }
+
+    .warn::before { content: "⚠️  "; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 0.8rem 0;
+    }
+
+    th {
+      background: #161b22;
+      color: #f0f6fc;
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 2px solid #30363d;
+    }
+
+    td {
+      padding: 0.55rem 1rem;
+      border-bottom: 1px solid #21262d;
+      color: #c9d1d9;
+    }
+
+    td code { font-size: 0.83rem; }
+
+    tr:hover td { background: #161b22; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #30363d;
+      color: #8b949e;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Git &amp; GitHub Tutorial</h1>
-<p>Version control from zero to your first pull request</p>
+<header>
+  <h1>🌿 Git &amp; GitHub Tutorial <span class="badge">Beginner</span></h1>
+  <p>Version control from zero to your first pull request</p>
+</header>
 
 <nav>
-  <a href="#what-is-git">What is Git?</a> |
-  <a href="#install">Installation</a> |
-  <a href="#basics">Basic Commands</a> |
-  <a href="#branching">Branching</a> |
-  <a href="#github">GitHub</a> |
-  <a href="#workflow">Workflow</a> |
+  <a href="#what-is-git">What is Git?</a>
+  <a href="#install">Installation</a>
+  <a href="#basics">Basic Commands</a>
+  <a href="#branching">Branching</a>
+  <a href="#github">GitHub</a>
+  <a href="#workflow">Workflow</a>
   <a href="#cheatsheet">Cheat Sheet</a>
 </nav>
 
-<hr>
+<main>
 
-<!-- SECTION 1 -->
-<section id="what-is-git">
-  <h2>What is Git?</h2>
-  <p>
-    <strong>Git</strong> is a <em>version control system</em> that tracks changes in your code over time.
-    You can go back to any previous state, collaborate with others, and avoid losing work.
-  </p>
-  <p>
-    <strong>GitHub</strong> is a website that hosts Git repositories online so you and your team can access them from anywhere.
-  </p>
+  <!-- SECTION 1 -->
+  <section id="what-is-git">
+    <h2>What is Git?</h2>
+    <p>
+      <strong style="color:#f0f6fc">Git</strong> is a <em>version control system</em> — it tracks changes in your code over time so you can go back to any previous state, collaborate with others, and avoid losing work.
+    </p>
+    <p>
+      <strong style="color:#f0f6fc">GitHub</strong> is a website that hosts Git repositories online so you (and your team) can access them from anywhere.
+    </p>
+    <div class="step-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Track changes</h4>
+        <p>Every save (commit) records what changed and why.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Collaborate</h4>
+        <p>Multiple people can work on the same project safely.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Revert anytime</h4>
+        <p>Made a mistake? Roll back to a working version instantly.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Branch &amp; merge</h4>
+        <p>Experiment in isolation without breaking the main code.</p>
+      </div>
+    </div>
+  </section>
 
-  <h3>Why use Git?</h3>
-  <ol>
-    <li><strong>Track changes</strong> — Every save (commit) records what changed and why.</li>
-    <li><strong>Collaborate</strong> — Multiple people can work on the same project safely.</li>
-    <li><strong>Revert anytime</strong> — Made a mistake? Roll back to a working version instantly.</li>
-    <li><strong>Branch &amp; merge</strong> — Experiment in isolation without breaking the main code.</li>
-  </ol>
-</section>
+  <!-- SECTION 2 -->
+  <section id="install">
+    <h2>Installation &amp; Setup</h2>
+    <div class="card">
+      <h3>Install Git</h3>
+      <p><strong style="color:#f0f6fc">Windows:</strong> Download from <a href="https://git-scm.com" style="color:#58a6ff">git-scm.com</a> and run the installer.</p>
+      <p><strong style="color:#f0f6fc">macOS:</strong> Run <code>xcode-select --install</code> in Terminal, or via Homebrew: <code>brew install git</code></p>
+      <p><strong style="color:#f0f6fc">Linux (Ubuntu/Debian):</strong></p>
+      <pre><span class="cmd">sudo apt update &amp;&amp; sudo apt install git</span></pre>
+    </div>
 
-<hr>
+    <div class="card">
+      <h3>First-time configuration</h3>
+      <p>Tell Git who you are — this info appears on every commit:</p>
+      <pre>
+<span class="cmd">git config</span> <span class="flag">--global</span> user.name  <span class="str">"Your Name"</span>
+<span class="cmd">git config</span> <span class="flag">--global</span> user.email <span class="str">"you@example.com"</span>
+<span class="cmd">git config</span> <span class="flag">--global</span> core.editor <span class="str">"code --wait"</span>  <span class="comment"># VS Code as editor</span></pre>
+      <p>Verify your config:</p>
+      <pre><span class="cmd">git config</span> <span class="flag">--list</span></pre>
+    </div>
+  </section>
 
-<!-- SECTION 2 -->
-<section id="install">
-  <h2>Installation &amp; Setup</h2>
+  <!-- SECTION 3 -->
+  <section id="basics">
+    <h2>Basic Commands</h2>
 
-  <h3>Install Git</h3>
-  <p><strong>Windows:</strong> Download from <a href="https://git-scm.com">git-scm.com</a> and run the installer.</p>
-  <p><strong>macOS:</strong> Run in Terminal:</p>
-  <pre>xcode-select --install</pre>
-  <p>Or via Homebrew:</p>
-  <pre>brew install git</pre>
-  <p><strong>Linux (Ubuntu/Debian):</strong></p>
-  <pre>sudo apt update && sudo apt install git</pre>
+    <div class="card">
+      <h3>Initialize a repository</h3>
+      <pre>
+<span class="comment"># Create a new folder and open it</span>
+<span class="cmd">mkdir</span> my-project &amp;&amp; <span class="cmd">cd</span> my-project
 
-  <h3>First-time Configuration</h3>
-  <p>Tell Git who you are — this info appears on every commit:</p>
-  <pre>
-git config --global user.name  "Your Name"
-git config --global user.email "you@example.com"
-git config --global core.editor "code --wait"
-  </pre>
-  <p>Verify your config:</p>
-  <pre>git config --list</pre>
-</section>
+<span class="comment"># Initialize Git inside it</span>
+<span class="cmd">git init</span></pre>
+    </div>
 
-<hr>
+    <div class="card">
+      <h3>The three stages of Git</h3>
+      <p>Understanding this is the most important concept in Git:</p>
+      <table>
+        <thead>
+          <tr><th>Stage</th><th>What it means</th><th>Command to move forward</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Working Directory</td><td>Files you're editing right now</td><td><code>git add &lt;file&gt;</code></td></tr>
+          <tr><td>Staging Area</td><td>Files queued up for the next save</td><td><code>git commit -m "msg"</code></td></tr>
+          <tr><td>Repository</td><td>Saved history stored by Git</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-<!-- SECTION 3 -->
-<section id="basics">
-  <h2>Basic Commands</h2>
+    <div class="card">
+      <h3>Track, stage, and commit</h3>
+      <pre>
+<span class="comment"># Check what's changed</span>
+<span class="cmd">git status</span>
 
-  <h3>Initialize a repository</h3>
-  <pre>
-mkdir my-project
-cd my-project
-git init
-  </pre>
+<span class="comment"># Stage a specific file</span>
+<span class="cmd">git add</span> index.html
 
-  <h3>The Three Stages of Git</h3>
-  <table border="1" cellpadding="8" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Stage</th>
-        <th>What it means</th>
-        <th>Command to move forward</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Working Directory</td>
-        <td>Files you are editing right now</td>
-        <td><code>git add &lt;file&gt;</code></td>
-      </tr>
-      <tr>
-        <td>Staging Area</td>
-        <td>Files queued up for the next save</td>
-        <td><code>git commit -m "msg"</code></td>
-      </tr>
-      <tr>
-        <td>Repository</td>
-        <td>Saved history stored by Git</td>
-        <td>—</td>
-      </tr>
-    </tbody>
-  </table>
+<span class="comment"># Stage all changed files</span>
+<span class="cmd">git add</span> <span class="flag">.</span>
 
-  <h3>Track, Stage, and Commit</h3>
-  <pre>
-git status               &lt;!-- Check what changed --&gt;
-git add index.html       &lt;!-- Stage a specific file --&gt;
-git add .                &lt;!-- Stage all changes --&gt;
-git commit -m "Add homepage layout"
-  </pre>
+<span class="comment"># Commit with a message</span>
+<span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"Add homepage layout"</span></pre>
+    </div>
 
-  <h3>View History</h3>
-  <pre>
-git log
-git log --oneline
-git diff index.html
-  </pre>
+    <div class="card">
+      <h3>View history</h3>
+      <pre>
+<span class="comment"># Full history</span>
+<span class="cmd">git log</span>
 
-  <p><strong>Tip:</strong> Write commit messages in the present tense — e.g. "Add login form" not "Added login form".</p>
-</section>
+<span class="comment"># Short one-line history</span>
+<span class="cmd">git log</span> <span class="flag">--oneline</span>
 
-<hr>
+<span class="comment"># See what changed in a file</span>
+<span class="cmd">git diff</span> index.html</pre>
+    </div>
 
-<!-- SECTION 4 -->
-<section id="branching">
-  <h2>Branching &amp; Merging</h2>
-  <p>A <strong>branch</strong> is an independent copy of your code. Work on a feature in a branch; merge it back when ready.</p>
+    <div class="tip">Write commit messages in the present tense — e.g. "Add login form" not "Added login form".</div>
+  </section>
 
-  <pre>
-git branch                        &lt;!-- List all branches --&gt;
-git checkout -b feature/login     &lt;!-- Create and switch to new branch --&gt;
-git checkout main                 &lt;!-- Switch back to main --&gt;
-git merge feature/login           &lt;!-- Merge branch into main --&gt;
-git branch -d feature/login       &lt;!-- Delete branch after merging --&gt;
-  </pre>
+  <!-- SECTION 4 -->
+  <section id="branching">
+    <h2>Branching &amp; Merging</h2>
+    <p>A <strong style="color:#f0f6fc">branch</strong> is an independent copy of your code. Work on a feature in a branch; merge it back when ready.</p>
 
-  <p><strong>Warning:</strong> If Git says "merge conflict", two branches changed the same line.
-  Open the file, pick which version to keep, then <code>git add</code> and <code>git commit</code> to finish.</p>
-</section>
+    <div class="card">
+      <pre>
+<span class="comment"># List all branches (current shown with *)</span>
+<span class="cmd">git branch</span>
 
-<hr>
+<span class="comment"># Create and switch to a new branch</span>
+<span class="cmd">git checkout</span> <span class="flag">-b</span> feature/login
 
-<!-- SECTION 5 -->
-<section id="github">
-  <h2>Working with GitHub</h2>
+<span class="comment"># Switch back to main</span>
+<span class="cmd">git checkout</span> main
 
-  <h3>Push an existing repo to GitHub</h3>
-  <pre>
-git remote add origin https://github.com/yourname/repo.git
-git push -u origin main
-  </pre>
+<span class="comment"># Merge your branch into main</span>
+<span class="cmd">git merge</span> feature/login
 
-  <h3>Clone an existing repo</h3>
-  <pre>
-git clone https://github.com/yourname/repo.git
-cd repo
-  </pre>
+<span class="comment"># Delete branch after merging</span>
+<span class="cmd">git branch</span> <span class="flag">-d</span> feature/login</pre>
+    </div>
 
-  <h3>Keep your local code up to date</h3>
-  <pre>
-git pull origin main
-  </pre>
-</section>
+    <div class="warn">If Git says "merge conflict", two branches changed the same line. Open the file, pick which version to keep, then <code>git add</code> and <code>git commit</code> to finish.</div>
+  </section>
 
-<hr>
+  <!-- SECTION 5 -->
+  <section id="github">
+    <h2>Working with GitHub</h2>
 
-<!-- SECTION 6 -->
-<section id="workflow">
-  <h2>The Standard Workflow</h2>
-  <ol>
-    <li>Pull latest — <code>git pull origin main</code></li>
-    <li>Create a branch — <code>git checkout -b feature/x</code></li>
-    <li>Write code and commit — <code>git add . &amp;&amp; git commit -m "..."</code></li>
-    <li>Push the branch — <code>git push origin feature/x</code></li>
-    <li>Open a Pull Request on GitHub and get it reviewed</li>
-    <li>Merge on GitHub and delete the branch</li>
-  </ol>
-</section>
+    <div class="card">
+      <h3>Push an existing repo to GitHub</h3>
+      <pre>
+<span class="comment"># Add GitHub as the remote</span>
+<span class="cmd">git remote add</span> origin <span class="str">https://github.com/yourname/repo.git</span>
 
-<hr>
+<span class="comment"># Push your code</span>
+<span class="cmd">git push</span> <span class="flag">-u</span> origin main</pre>
+    </div>
 
-<!-- SECTION 7 -->
-<section id="cheatsheet">
-  <h2>Quick Cheat Sheet</h2>
-  <table border="1" cellpadding="8" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Command</th>
-        <th>What it does</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td><code>git init</code></td><td>Start a new repo in the current folder</td></tr>
-      <tr><td><code>git status</code></td><td>Show changed / untracked files</td></tr>
-      <tr><td><code>git add .</code></td><td>Stage all changes</td></tr>
-      <tr><td><code>git commit -m "msg"</code></td><td>Save a snapshot with a message</td></tr>
-      <tr><td><code>git log --oneline</code></td><td>View compact history</td></tr>
-      <tr><td><code>git diff</code></td><td>Show unstaged changes</td></tr>
-      <tr><td><code>git branch</code></td><td>List all branches</td></tr>
-      <tr><td><code>git checkout -b name</code></td><td>Create and switch to a new branch</td></tr>
-      <tr><td><code>git merge name</code></td><td>Merge a branch into current</td></tr>
-      <tr><td><code>git clone &lt;url&gt;</code></td><td>Copy a remote repo locally</td></tr>
-      <tr><td><code>git push origin main</code></td><td>Upload commits to GitHub</td></tr>
-      <tr><td><code>git pull origin main</code></td><td>Download latest from GitHub</td></tr>
-      <tr><td><code>git stash</code></td><td>Temporarily shelve uncommitted work</td></tr>
-      <tr><td><code>git stash pop</code></td><td>Restore stashed work</td></tr>
-      <tr><td><code>git reset --hard HEAD~1</code></td><td>Undo last commit (destructive!)</td></tr>
-    </tbody>
-  </table>
-</section>
+    <div class="card">
+      <h3>Clone an existing repo</h3>
+      <pre>
+<span class="cmd">git clone</span> <span class="str">https://github.com/yourname/repo.git</span>
+<span class="cmd">cd</span> repo</pre>
+    </div>
 
-<hr>
+    <div class="card">
+      <h3>Keep your local code up to date</h3>
+      <pre>
+<span class="comment"># Pull latest changes from GitHub</span>
+<span class="cmd">git pull</span> origin main</pre>
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section id="workflow">
+    <h2>The Standard Workflow</h2>
+    <p>Every professional team follows roughly this loop:</p>
+    <div class="step-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Pull latest</h4>
+        <p><code>git pull origin main</code></p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Create branch</h4>
+        <p><code>git checkout -b feature/x</code></p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Write code, commit</h4>
+        <p><code>git add . &amp;&amp; git commit -m "…"</code></p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Push branch</h4>
+        <p><code>git push origin feature/x</code></p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h4>Open Pull Request</h4>
+        <p>On GitHub — get code reviewed.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <h4>Merge &amp; delete</h4>
+        <p>Merge on GitHub, delete the branch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="cheatsheet">
+    <h2>Quick Cheat Sheet</h2>
+    <table>
+      <thead>
+        <tr><th>Command</th><th>What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>git init</code></td><td>Start a new repo in the current folder</td></tr>
+        <tr><td><code>git status</code></td><td>Show changed / untracked files</td></tr>
+        <tr><td><code>git add .</code></td><td>Stage all changes</td></tr>
+        <tr><td><code>git commit -m "msg"</code></td><td>Save a snapshot with a message</td></tr>
+        <tr><td><code>git log --oneline</code></td><td>View history in a compact form</td></tr>
+        <tr><td><code>git diff</code></td><td>Show unstaged changes</td></tr>
+        <tr><td><code>git branch</code></td><td>List all branches</td></tr>
+        <tr><td><code>git checkout -b name</code></td><td>Create and switch to a new branch</td></tr>
+        <tr><td><code>git merge name</code></td><td>Merge a branch into current</td></tr>
+        <tr><td><code>git clone &lt;url&gt;</code></td><td>Copy a remote repo locally</td></tr>
+        <tr><td><code>git push origin main</code></td><td>Upload commits to GitHub</td></tr>
+        <tr><td><code>git pull origin main</code></td><td>Download latest from GitHub</td></tr>
+        <tr><td><code>git stash</code></td><td>Temporarily shelve uncommitted work</td></tr>
+        <tr><td><code>git stash pop</code></td><td>Restore stashed work</td></tr>
+        <tr><td><code>git reset --hard HEAD~1</code></td><td>Undo last commit (destructive!)</td></tr>
+      </tbody>
+    </table>
+    <div class="warn"><code>git reset --hard</code> permanently discards commits. Use with caution.</div>
+  </section>
+
+</main>
+
 <footer>
-  <p>Git &amp; GitHub Tutorial &mdash; git-scm.com &mdash; docs.github.com</p>
+  Git &amp; GitHub Tutorial · Built with ❤️ for beginners · git-scm.com · docs.github.com
 </footer>
 
 </body>
