@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Git & GitHub Tutorial</title>
+</head>
+<body>
+
+<h1>Git &amp; GitHub Tutorial</h1>
+<p>Version control from zero to your first pull request</p>
+
+<nav>
+  <a href="#what-is-git">What is Git?</a> |
+  <a href="#install">Installation</a> |
+  <a href="#basics">Basic Commands</a> |
+  <a href="#branching">Branching</a> |
+  <a href="#github">GitHub</a> |
+  <a href="#workflow">Workflow</a> |
+  <a href="#cheatsheet">Cheat Sheet</a>
+</nav>
+
+<hr>
+
+<!-- SECTION 1 -->
+<section id="what-is-git">
+  <h2>What is Git?</h2>
+  <p>
+    <strong>Git</strong> is a <em>version control system</em> that tracks changes in your code over time.
+    You can go back to any previous state, collaborate with others, and avoid losing work.
+  </p>
+  <p>
+    <strong>GitHub</strong> is a website that hosts Git repositories online so you and your team can access them from anywhere.
+  </p>
+
+  <h3>Why use Git?</h3>
+  <ol>
+    <li><strong>Track changes</strong> — Every save (commit) records what changed and why.</li>
+    <li><strong>Collaborate</strong> — Multiple people can work on the same project safely.</li>
+    <li><strong>Revert anytime</strong> — Made a mistake? Roll back to a working version instantly.</li>
+    <li><strong>Branch &amp; merge</strong> — Experiment in isolation without breaking the main code.</li>
+  </ol>
+</section>
+
+<hr>
+
+<!-- SECTION 2 -->
+<section id="install">
+  <h2>Installation &amp; Setup</h2>
+
+  <h3>Install Git</h3>
+  <p><strong>Windows:</strong> Download from <a href="https://git-scm.com">git-scm.com</a> and run the installer.</p>
+  <p><strong>macOS:</strong> Run in Terminal:</p>
+  <pre>xcode-select --install</pre>
+  <p>Or via Homebrew:</p>
+  <pre>brew install git</pre>
+  <p><strong>Linux (Ubuntu/Debian):</strong></p>
+  <pre>sudo apt update && sudo apt install git</pre>
+
+  <h3>First-time Configuration</h3>
+  <p>Tell Git who you are — this info appears on every commit:</p>
+  <pre>
+git config --global user.name  "Your Name"
+git config --global user.email "you@example.com"
+git config --global core.editor "code --wait"
+  </pre>
+  <p>Verify your config:</p>
+  <pre>git config --list</pre>
+</section>
+
+<hr>
+
+<!-- SECTION 3 -->
+<section id="basics">
+  <h2>Basic Commands</h2>
+
+  <h3>Initialize a repository</h3>
+  <pre>
+mkdir my-project
+cd my-project
+git init
+  </pre>
+
+  <h3>The Three Stages of Git</h3>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Stage</th>
+        <th>What it means</th>
+        <th>Command to move forward</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Working Directory</td>
+        <td>Files you are editing right now</td>
+        <td><code>git add &lt;file&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Staging Area</td>
+        <td>Files queued up for the next save</td>
+        <td><code>git commit -m "msg"</code></td>
+      </tr>
+      <tr>
+        <td>Repository</td>
+        <td>Saved history stored by Git</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Track, Stage, and Commit</h3>
+  <pre>
+git status               &lt;!-- Check what changed --&gt;
+git add index.html       &lt;!-- Stage a specific file --&gt;
+git add .                &lt;!-- Stage all changes --&gt;
+git commit -m "Add homepage layout"
+  </pre>
+
+  <h3>View History</h3>
+  <pre>
+git log
+git log --oneline
+git diff index.html
+  </pre>
+
+  <p><strong>Tip:</strong> Write commit messages in the present tense — e.g. "Add login form" not "Added login form".</p>
+</section>
+
+<hr>
+
+<!-- SECTION 4 -->
+<section id="branching">
+  <h2>Branching &amp; Merging</h2>
+  <p>A <strong>branch</strong> is an independent copy of your code. Work on a feature in a branch; merge it back when ready.</p>
+
+  <pre>
+git branch                        &lt;!-- List all branches --&gt;
+git checkout -b feature/login     &lt;!-- Create and switch to new branch --&gt;
+git checkout main                 &lt;!-- Switch back to main --&gt;
+git merge feature/login           &lt;!-- Merge branch into main --&gt;
+git branch -d feature/login       &lt;!-- Delete branch after merging --&gt;
+  </pre>
+
+  <p><strong>Warning:</strong> If Git says "merge conflict", two branches changed the same line.
+  Open the file, pick which version to keep, then <code>git add</code> and <code>git commit</code> to finish.</p>
+</section>
+
+<hr>
+
+<!-- SECTION 5 -->
+<section id="github">
+  <h2>Working with GitHub</h2>
+
+  <h3>Push an existing repo to GitHub</h3>
+  <pre>
+git remote add origin https://github.com/yourname/repo.git
+git push -u origin main
+  </pre>
+
+  <h3>Clone an existing repo</h3>
+  <pre>
+git clone https://github.com/yourname/repo.git
+cd repo
+  </pre>
+
+  <h3>Keep your local code up to date</h3>
+  <pre>
+git pull origin main
+  </pre>
+</section>
+
+<hr>
+
+<!-- SECTION 6 -->
+<section id="workflow">
+  <h2>The Standard Workflow</h2>
+  <ol>
+    <li>Pull latest — <code>git pull origin main</code></li>
+    <li>Create a branch — <code>git checkout -b feature/x</code></li>
+    <li>Write code and commit — <code>git add . &amp;&amp; git commit -m "..."</code></li>
+    <li>Push the branch — <code>git push origin feature/x</code></li>
+    <li>Open a Pull Request on GitHub and get it reviewed</li>
+    <li>Merge on GitHub and delete the branch</li>
+  </ol>
+</section>
+
+<hr>
+
+<!-- SECTION 7 -->
+<section id="cheatsheet">
+  <h2>Quick Cheat Sheet</h2>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>What it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>git init</code></td><td>Start a new repo in the current folder</td></tr>
+      <tr><td><code>git status</code></td><td>Show changed / untracked files</td></tr>
+      <tr><td><code>git add .</code></td><td>Stage all changes</td></tr>
+      <tr><td><code>git commit -m "msg"</code></td><td>Save a snapshot with a message</td></tr>
+      <tr><td><code>git log --oneline</code></td><td>View compact history</td></tr>
+      <tr><td><code>git diff</code></td><td>Show unstaged changes</td></tr>
+      <tr><td><code>git branch</code></td><td>List all branches</td></tr>
+      <tr><td><code>git checkout -b name</code></td><td>Create and switch to a new branch</td></tr>
+      <tr><td><code>git merge name</code></td><td>Merge a branch into current</td></tr>
+      <tr><td><code>git clone &lt;url&gt;</code></td><td>Copy a remote repo locally</td></tr>
+      <tr><td><code>git push origin main</code></td><td>Upload commits to GitHub</td></tr>
+      <tr><td><code>git pull origin main</code></td><td>Download latest from GitHub</td></tr>
+      <tr><td><code>git stash</code></td><td>Temporarily shelve uncommitted work</td></tr>
+      <tr><td><code>git stash pop</code></td><td>Restore stashed work</td></tr>
+      <tr><td><code>git reset --hard HEAD~1</code></td><td>Undo last commit (destructive!)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr>
+<footer>
+  <p>Git &amp; GitHub Tutorial &mdash; git-scm.com &mdash; docs.github.com</p>
+</footer>
+
+</body>
+</html>
